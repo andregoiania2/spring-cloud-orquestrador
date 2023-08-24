@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "8a739e87-a229-4f40-8882-6cb939313a89",
+		"name": "API - Gateway - Zuul",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Rotas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5555/actuator/routes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"actuator",
+						"routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fornecedor-info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5555/fornecedor/info/GO",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"fornecedor",
+						"info",
+						"GO"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "loja-compra",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"itens\": [{\"id\":1, \"qtde\": 2},{\"id\":1, \"qtde\": 2}],\n\t\"endereco\": {\"rua\": \"Ruas da Maria\", \"numero\":15, \"estado\":\"GO\"}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5555/loja/compra",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"loja",
+						"compra"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transportador",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"pedidoId\":156,\n\"enderecoOrigem\": \"endereco sp\",\n\"enderecoDestino\" : \"endereco go\",\n\"dataParaEntrega\": \"2020-06-07\"\n}\n\n"
+				},
+				"url": {
+					"raw": "localhost:5555/transportador/entrega",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"transportador",
+						"entrega"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fornecedor-compra",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "e7bb2e65-290b-4929-b2dd-b67bfac28ccb",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\"id\":1, \"qtde\": 2},{\"id\":1, \"qtde\": 2}]"
+				},
+				"url": {
+					"raw": "localhost:5555/fornecedor/pedido",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"fornecedor",
+						"pedido"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

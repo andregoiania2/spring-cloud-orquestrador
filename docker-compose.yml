@@ -1,0 +1,85 @@
+version: '3.8'
+
+networks:
+  database:
+    ipam:
+      config:
+        - subnet: "172.0.0.0/16"
+  database-fornecedor: 
+   ipam:
+    config:
+     - subnet: "172.100.0.0/16"
+  database-transp:
+   ipam:
+    config:
+     - subnet: "171.0.0.0/16" 
+  database-loja:
+   ipam:
+    config:
+     - subnet: "171.100.0.0/16"
+        
+services:
+  postgres-fornecedor:
+    networks:
+      database-fornecedor:      
+        aliases:
+          - postgres-fornecedor
+    image: "postgres"
+    container_name: fornecedor
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=fornecedor      
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./migration/docker-database-initial.sql:/docker-entrypoint-initdb.d/docker-fornecedor-initial.sql     
+  
+  postgre-transp:
+    networks:
+      database-transp:
+        aliases:
+          - postgres-transp
+    image: "postgres"
+    container_name: transportadora
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=transortadora      
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./migration/docker-database-initial.sql:/docker-entrypoint-initdb.d/docker-transp-initial.sql       
+  
+  postgre-loja:
+    networks:
+      database-loja:
+        aliases:
+          - postgres-loja
+    image: "postgres"
+    container_name: loja
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=loja      
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./migration/docker-database-initial.sql:/docker-entrypoint-initdb.d/docker-loja-initial.sql
+  
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "andrelinom@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "123456"
+    ports:
+      - "54321:80"
+    networks:
+      - database  
+    depends_on:
+      - postgre-loja
+      - postgres-fornecedor
+      - postgre-transp     
+  
+

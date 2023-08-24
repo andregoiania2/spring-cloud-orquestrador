@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "149d05d8-72df-4562-a979-a70b8848e739",
+		"name": "spring-cloud-flores",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Loja-compra",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"itens\": [{\"id\":1, \"qtde\": 2},{\"id\":1, \"qtde\": 2}],\n\t\"endereco\": {\"rua\": \"Ruas da Maria\", \"numero\":15, \"estado\":\"GO\"}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/compra",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"compra"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "compra-id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/compra/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"compra",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reprocessa-pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/compra/reprocessar/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"compra",
+						"reprocessar",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
